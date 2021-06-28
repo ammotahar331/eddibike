@@ -4,7 +4,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: false, // or 'media' or 'class'
-  mode: "jit",
+  // mode: "jit",
   theme: {
     extend: {
       colors: {
