@@ -16,9 +16,10 @@
     "format": "prettier --no-error-on-unmatched-pattern --write ./**/*.{ts,tsx,scss,css,json}",
     "tsc": "tsc",
     "ci": "yarn lint && yarn format && yarn tsc",
-    "api": "swagger-typescript-api --no-client --modular --responses --extract-request-params -p http://businesscircleapi.azurewebsites.net/swagger/v1/swagger.json -o ./src/types/api"
+    "api": "swagger-typescript-api --no-client --modular --responses --extract-request-params -p https://eddiebikeapi.azurewebsites.net/swagger/v1/swagger.json -o ./src/types/api"
   },
   "dependencies": {
+    "@hookform/error-message": "^2.0.0",
     "@reduxjs/toolkit": "^1.6.0",
     "axios": "^0.21.1",
     "cookie": "^0.4.1",
@@ -27,6 +28,7 @@
     "nprogress": "^0.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.9.0",
     "react-redux": "^7.2.4",
     "sass": "^1.35.1",
     "swr": "^0.5.6",

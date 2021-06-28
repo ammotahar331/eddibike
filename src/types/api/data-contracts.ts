@@ -116,6 +116,19 @@ export interface SwitchToLinkedAccountOutput {
   tenancyName?: string | null;
 }
 
+export interface AttributeDto {
+  name?: string | null;
+
+  /** @format int32 */
+  id?: number;
+}
+
+export interface PagedResultDtoOfAttributeDto {
+  /** @format int32 */
+  totalCount?: number;
+  items?: AttributeDto[] | null;
+}
+
 export interface AuditLogListDto {
   /** @format int64 */
   userId?: number | null;
@@ -210,891 +223,6 @@ export interface EntityPropertyChangeDto {
   id?: number;
 }
 
-export interface AuthorListDto {
-  fullName?: string | null;
-  logo?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfAuthorListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: AuthorListDto[] | null;
-}
-
-export interface CreateOrEditAuthorDto {
-  /** @format int32 */
-  id?: number | null;
-  fullName?: string | null;
-  logo?: string | null;
-}
-
-export interface IdTitleDto {
-  /** @format int32 */
-  id?: number;
-  title?: string | null;
-  selected?: boolean;
-}
-
-export interface EventListDto {
-  _ThumbnailImageAddress?: string | null;
-  thumbnailImageAddress?: string | null;
-  title?: string | null;
-  isPublished?: boolean;
-
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-  location?: string | null;
-  eventType?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfEventListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: EventListDto[] | null;
-}
-
-export interface CreateEventTranslationInput {
-  title?: string | null;
-  language?: string | null;
-}
-
-export interface CreateEventInput {
-  translations?: CreateEventTranslationInput[] | null;
-}
-
-export interface BCEventTranslationDto {
-  title?: string | null;
-  miniDescription?: string | null;
-  description?: string | null;
-  location?: string | null;
-  eventType?: string | null;
-  language?: string | null;
-}
-
-/**
- * @format int32
- */
-export enum PartnerType {
-  Normal = 0,
-  NetworkMedia = 10,
-}
-
-export interface PartnerDto {
-  title?: string | null;
-  _Image?: string | null;
-  image?: string | null;
-  link?: string | null;
-
-  /** @format int32 */
-  eventId?: number;
-  type?: PartnerType;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface SchedulePartDto {
-  /** @format date-span */
-  time?: string;
-
-  /** @format int32 */
-  scheduleId?: number;
-  title?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface ScheduleDto {
-  /** @format int32 */
-  day?: number | null;
-
-  /** @format date-time */
-  date?: string;
-  parts?: SchedulePartDto[] | null;
-
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface SimpleCourseDto {
-  title?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface LecturerDto {
-  _ProfilePicture?: string | null;
-  profilePicture?: string | null;
-  fullName?: string | null;
-  headline?: string | null;
-  bio?: string | null;
-  _CVAddress?: string | null;
-  cvAddress?: string | null;
-  courses?: SimpleCourseDto[] | null;
-  events?: EventListDto[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-/**
- * @format int32
- */
-export enum LecturerRole {
-  Lecturer = 0,
-  Initiator = 10,
-  TechnicalManagement = 20,
-  Moderation = 30,
-}
-
-export interface EventLecturerDto {
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  lecturerId?: number;
-  lecturer?: LecturerDto;
-  role?: LecturerRole;
-
-  /** @format int32 */
-  id?: number;
-}
-
-/**
- * @format int32
- */
-export enum EventTimeType {
-  Offline = 0,
-  Online = 10,
-}
-
-export interface EventTimeDto {
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-
-  /** @format double */
-  price?: number;
-  description?: string | null;
-  location?: string | null;
-
-  /** @format int32 */
-  eventId?: number;
-  type?: EventTimeType;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface EventViewPartDto {
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  htmlContent?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface ChannelDto {
-  title?: string | null;
-  coverImage?: string | null;
-  slug?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-/**
- * @format int32
- */
-export enum CourseUserState {
-  NotStarted = 0,
-  Started = 10,
-  Completed = 20,
-}
-
-/**
- * @format int32
- */
-export enum CoursesResourceType {
-  Link = 0,
-  File = 10,
-}
-
-export interface CoursesResourceDto {
-  /** @format int32 */
-  courseId?: number;
-
-  /** @format int32 */
-  position?: number;
-  url?: string | null;
-  type?: CoursesResourceType;
-  content?: string | null;
-  title?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CourseDto {
-  title?: string | null;
-  description?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  duration?: number;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  courseMediasCount?: number;
-  channel?: ChannelDto;
-  overview?: string | null;
-
-  /** @format int32 */
-  likes?: number;
-  isLiked?: boolean;
-  access?: boolean;
-  state?: CourseUserState;
-  coursesResources?: CoursesResourceDto[] | null;
-  lecturers?: LecturerDto[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface EventCourseDto {
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  courseId?: number;
-  course?: CourseDto;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetForEditEventDto {
-  /** @format int32 */
-  id?: number | null;
-  slug?: string | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  pdf?: string | null;
-  isPublished?: boolean;
-
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-
-  /** @format int32 */
-  speakers?: number;
-
-  /** @format int32 */
-  participants?: number;
-
-  /** @format int32 */
-  innovativeDays?: number;
-  categories?: number[] | null;
-  translations?: BCEventTranslationDto[] | null;
-  partners?: PartnerDto[] | null;
-  schedules?: ScheduleDto[] | null;
-  lecturers?: EventLecturerDto[] | null;
-  eventTimes?: EventTimeDto[] | null;
-  viewParts?: EventViewPartDto[] | null;
-  courses?: EventCourseDto[] | null;
-}
-
-export interface EditEventInputTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  miniDescription?: string | null;
-  location?: string | null;
-  eventType?: string | null;
-  language?: string | null;
-}
-
-export interface EditEventInput {
-  slug?: string | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  pdf?: string | null;
-  isPublished?: boolean;
-
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-  categories?: number[] | null;
-
-  /** @format int32 */
-  speakers?: number;
-
-  /** @format int32 */
-  participants?: number;
-
-  /** @format int32 */
-  innovativeDays?: number;
-  translations?: EditEventInputTranslationDto[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface AddEventLecturerInput {
-  role?: LecturerRole;
-
-  /** @format int32 */
-  lecturerId?: number;
-
-  /** @format int32 */
-  eventId?: number;
-}
-
-export interface AddEventCourseInput {
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  courseId?: number;
-}
-
-export interface CreateOrEditScheduleInput {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  day?: number | null;
-
-  /** @format date-time */
-  date?: string;
-}
-
-export interface SchedulePartTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
-}
-
-export interface GetForEditSchedulePartDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format date-span */
-  time?: string;
-
-  /** @format int32 */
-  scheduleId?: number;
-  translations?: SchedulePartTranslationDto[] | null;
-}
-
-export interface GetForEditScheduleDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  day?: number | null;
-
-  /** @format date-time */
-  date?: string;
-
-  /** @format int32 */
-  eventId?: number;
-  parts?: GetForEditSchedulePartDto[] | null;
-}
-
-export interface CreateOrEditSchedulePartInput {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format date-span */
-  time?: string;
-
-  /** @format int32 */
-  scheduleId?: number;
-  translations?: SchedulePartTranslationDto[] | null;
-}
-
-export interface EventTimeTranslationDto {
-  description?: string | null;
-  location?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditEventTimeInput {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-
-  /** @format double */
-  price?: number;
-
-  /** @format int32 */
-  eventId?: number;
-  type?: EventTimeType;
-  translations?: EventTimeTranslationDto[] | null;
-}
-
-export interface GetForEditEventTimeDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-
-  /** @format double */
-  price?: number;
-
-  /** @format int32 */
-  eventId?: number;
-  type?: EventTimeType;
-  translations?: EventTimeTranslationDto[] | null;
-}
-
-export interface CreateOrEditPartnerInput {
-  /** @format int32 */
-  id?: number | null;
-  title?: string | null;
-  image?: string | null;
-  link?: string | null;
-  type?: PartnerType;
-
-  /** @format int32 */
-  eventId?: number;
-}
-
-export interface GetForEditPartnerDto {
-  /** @format int32 */
-  id?: number | null;
-  title?: string | null;
-  image?: string | null;
-  link?: string | null;
-
-  /** @format int32 */
-  eventId?: number;
-  type?: PartnerType;
-}
-
-export interface EventViewPartTranslationDto {
-  title?: string | null;
-  htmlContent?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditEventViewPartInput {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  position?: number;
-  translations?: EventViewPartTranslationDto[] | null;
-}
-
-export interface GetForEditEventViewPartDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  eventId?: number;
-
-  /** @format int32 */
-  position?: number;
-  translations?: EventViewPartTranslationDto[] | null;
-}
-
-export interface CategoryDto {
-  slug?: string | null;
-  title?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface EventTileDto {
-  slug?: string | null;
-  _ThumbnailImageAddress?: string | null;
-  thumbnailImageAddress?: string | null;
-  title?: string | null;
-  miniDescription?: string | null;
-  location?: string | null;
-  eventType?: string | null;
-
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-  categories?: CategoryDto[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfEventTileDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: EventTileDto[] | null;
-}
-
-export interface PerfectEventDto {
-  slug?: string | null;
-  _ThumbnailImageAddress?: string | null;
-  _CoverImageAddress?: string | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  _PDF?: string | null;
-  pdf?: string | null;
-  title?: string | null;
-  miniDescription?: string | null;
-  description?: string | null;
-  location?: string | null;
-  eventType?: string | null;
-
-  /** @format int32 */
-  speakers?: number;
-
-  /** @format int32 */
-  participants?: number;
-
-  /** @format int32 */
-  innovativeDays?: number;
-  categories?: CategoryDto[] | null;
-  lecturers?: {
-    Lecturer?: LecturerDto[];
-    Initiator?: LecturerDto[];
-    TechnicalManagement?: LecturerDto[];
-    Moderation?: LecturerDto[];
-  };
-  schedules?: ScheduleDto[] | null;
-  eventTimes?: EventTimeDto[] | null;
-  viewParts?: EventViewPartDto[] | null;
-  partners?: { Normal?: PartnerDto[]; NetworkMedia?: PartnerDto[] };
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface TestsListDto {
-  /** @format date-time */
-  creationTime?: string;
-  isPublished?: boolean;
-  course?: CourseDto;
-  title?: string | null;
-
-  /** @format int32 */
-  questionsCount?: number;
-
-  /** @format int32 */
-  takesCount?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfTestsListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: TestsListDto[] | null;
-}
-
-export interface BCTestTranslationDto {
-  title?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditTestDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  courseId?: number | null;
-
-  /** @format int32 */
-  scoreToPass?: number;
-  translations?: BCTestTranslationDto[] | null;
-}
-
-export interface BCQuestionTranslationDto {
-  title?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditBCQuestionDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  testId?: number;
-
-  /** @format int32 */
-  position?: number;
-  translations?: BCQuestionTranslationDto[] | null;
-}
-
-export interface BCAnswerTranslationDto {
-  title?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditBCAnswerDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  questionId?: number;
-
-  /** @format int32 */
-  position?: number;
-  isCorrect?: boolean;
-
-  /** @format int32 */
-  score?: number;
-  translations?: BCAnswerTranslationDto[] | null;
-}
-
-export interface GetForEditTestDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  courseId?: number | null;
-
-  /** @format int32 */
-  scoreToPass?: number;
-  translations?: BCTestTranslationDto[] | null;
-}
-
-export interface GetForEditEditQuestionDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  testId?: number;
-
-  /** @format int32 */
-  position?: number;
-  translations?: BCQuestionTranslationDto[] | null;
-}
-
-export interface GetForEditEditAnswerDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  questionId?: number;
-
-  /** @format int32 */
-  position?: number;
-  isCorrect?: boolean;
-
-  /** @format int32 */
-  score?: number;
-  translations?: BCAnswerTranslationDto[] | null;
-}
-
-export interface GetAnswerDetailOutput {
-  title?: string | null;
-
-  /** @format int32 */
-  position?: number;
-  isCorrect?: boolean;
-
-  /** @format int32 */
-  score?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetQuestionDetailOutput {
-  title?: string | null;
-
-  /** @format int32 */
-  position?: number;
-
-  /** @format int32 */
-  totalScore?: number;
-  answers?: GetAnswerDetailOutput[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetTestDetailOutput {
-  title?: string | null;
-  questions?: GetQuestionDetailOutput[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetTestsOutput {
-  /** @format int32 */
-  questionsCount?: number;
-  title?: string | null;
-  participated?: boolean;
-
-  /** @format int32 */
-  score?: number;
-  isCompleted?: boolean;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface BCAnswerDto {
-  title?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface BCQuestionAnswerDto {
-  title?: string | null;
-
-  /** @format int32 */
-  totalScore?: number;
-
-  /** @format int32 */
-  optionCount?: number;
-  answers?: BCAnswerDto[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetTestTakesAnswersOutput {
-  /** @format int32 */
-  questionId?: number;
-
-  /** @format int32 */
-  score?: number;
-  answers?: number[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetTestTakesOutput {
-  /** @format int32 */
-  score?: number;
-  isCompleted?: boolean;
-  answers?: GetTestTakesAnswersOutput[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetTestOutput {
-  /** @format int32 */
-  questionsCount?: number;
-  title?: string | null;
-
-  /** @format int32 */
-  scoreToPass?: number;
-  questions?: BCQuestionAnswerDto[] | null;
-  takes?: GetTestTakesOutput[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface SendAnswerInput {
-  /** @format int32 */
-  takeId?: number;
-
-  /** @format int32 */
-  questionId?: number;
-  answerId?: number[] | null;
-}
-
-export interface SendAnswerOutput {
-  correctAnswersId?: number[] | null;
-
-  /** @format int32 */
-  score?: number;
-}
-
-/**
- * @format int32
- */
-export enum BlobType {
-  News = 0,
-  EventPdf = 10,
-  CoursesMedia = 20,
-}
-
-/**
- * @format int32
- */
-export enum BlobDirectoryContentType {
-  File = 0,
-  Directory = 10,
-}
-
-export interface GetContentOutput {
-  type?: BlobDirectoryContentType;
-  name?: string | null;
-
-  /** @format int64 */
-  size?: number;
-  path?: string | null;
-  mediaType?: string | null;
-  extension?: string | null;
-
-  /** @format date-time */
-  creationTime?: string;
-}
-
-export type TypeDefinitionsBlobType = BlobType;
-
-export interface BlobStorageOutput {
-  succeed?: boolean;
-  url?: string | null;
-  message?: string | null;
-}
-
 export interface CacheDto {
   name?: string | null;
 }
@@ -1110,199 +238,86 @@ export interface EntityDtoOfString {
 /**
  * @format int32
  */
-export enum CategoryType {
-  News = 0,
-  Events = 10,
+export enum FriendshipState {
+  Accepted = 1,
+  Blocked = 2,
 }
 
-export interface CategoryListDto {
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  title?: string | null;
-  description?: string | null;
-  type?: CategoryType;
-
+export interface FriendDto {
   /** @format int64 */
-  dataCount?: number;
+  friendUserId?: number;
 
   /** @format int32 */
-  id?: number;
+  friendTenantId?: number | null;
+  friendUserName?: string | null;
+  friendTenancyName?: string | null;
+
+  /** @format uuid */
+  friendProfilePictureId?: string | null;
+
+  /** @format int32 */
+  unreadMessageCount?: number;
+  isOnline?: boolean;
+  state?: FriendshipState;
 }
 
-export interface PagedResultDtoOfCategoryListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CategoryListDto[] | null;
-}
-
-export interface CategoryTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditCategoryDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  type?: CategoryType;
-  translations?: CategoryTranslationDto[] | null;
-}
-
-export interface GetForEditCategoryDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  type?: CategoryType;
-  translations?: CategoryTranslationDto[] | null;
-}
-
-export interface ChannelListDto {
-  title?: string | null;
-  coverImage?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-
-  /** @format int32 */
-  coursesCount?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfChannelListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: ChannelListDto[] | null;
-}
-
-export interface ChannelTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditChannelDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  librarySubjectId?: number;
-
-  /** @format double */
-  price?: number;
-  translations?: ChannelTranslationDto[] | null;
-}
-
-export interface GetForEditChannelDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  librarySubjectId?: number;
-
-  /** @format double */
-  price?: number;
-  translations?: ChannelTranslationDto[] | null;
-}
-
-export interface GetChannelsOutput {
-  title?: string | null;
-  coverImage?: string | null;
-  description?: string | null;
-  slug?: string | null;
-
-  /** @format double */
-  price?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface SimpleUserDto {
-  profilePictureAddress?: string | null;
-  name?: string | null;
-  surname?: string | null;
-  userName?: string | null;
-
-  /** @format int64 */
-  id?: number;
+export interface GetUserChatFriendsWithSettingsOutput {
+  /** @format date-time */
+  serverTime?: string;
+  friends?: FriendDto[] | null;
 }
 
 /**
  * @format int32
  */
-export enum CommentObjectType {
-  News = 0,
-  CoursesMedia = 10,
-  Course = 20,
-  Tweet = 30,
+export enum ChatSide {
+  Sender = 1,
+  Receiver = 2,
 }
 
-export interface CommentDto {
-  body?: string | null;
+/**
+ * @format int32
+ */
+export enum ChatMessageReadState {
+  Unread = 1,
+  Read = 2,
+}
+
+export interface ChatMessageDto {
+  /** @format int64 */
+  userId?: number;
 
   /** @format int32 */
-  parentId?: number | null;
-  creatorUser?: SimpleUserDto;
+  tenantId?: number | null;
+
+  /** @format int64 */
+  targetUserId?: number;
+
+  /** @format int32 */
+  targetTenantId?: number | null;
+  side?: ChatSide;
+  readState?: ChatMessageReadState;
+  receiverReadState?: ChatMessageReadState;
+  message?: string | null;
 
   /** @format date-time */
   creationTime?: string;
-  type?: CommentObjectType;
-  isMine?: boolean;
+  sharedMessageId?: string | null;
 
   /** @format int32 */
   id?: number;
 }
 
-export interface PagedResultDtoOfCommentDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CommentDto[] | null;
+export interface ListResultDtoOfChatMessageDto {
+  items?: ChatMessageDto[] | null;
 }
 
-export interface CreateOrUpdateCommentInput {
+export interface MarkAllUnreadMessagesOfUserAsReadInput {
   /** @format int32 */
-  id?: number | null;
-  body?: string | null;
-
-  /** @format int32 */
-  parentId?: number | null;
-
-  /** @format int32 */
-  objectId?: number;
-}
-
-export interface CreateOrUpdateCommentInputOfNullableOfInt64 {
-  /** @format int32 */
-  id?: number | null;
-  body?: string | null;
-
-  /** @format int32 */
-  parentId?: number | null;
+  tenantId?: number | null;
 
   /** @format int64 */
-  objectId?: number | null;
+  userId?: number;
 }
 
 export interface SubscribableEditionComboboxItemDto {
@@ -1345,436 +360,6 @@ export interface PagedResultDtoOfNameValueDto {
 
 export interface GetDefaultEditionNameOutput {
   name?: string | null;
-}
-
-export interface CompanyListDto {
-  name?: string | null;
-  symbol?: string | null;
-  marketName?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfCompanyListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CompanyListDto[] | null;
-}
-
-export interface CreateOrEditCompanyDto {
-  /** @format int32 */
-  id?: number | null;
-  name?: string | null;
-  symbol?: string | null;
-
-  /** @format int32 */
-  marketId?: number;
-}
-
-export interface GetForEditCompanyDto {
-  /** @format int32 */
-  id?: number | null;
-  name?: string | null;
-  symbol?: string | null;
-
-  /** @format int32 */
-  marketId?: number;
-}
-
-export interface MarketDto {
-  name?: string | null;
-  symbol?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CompanyDto {
-  name?: string | null;
-  symbol?: string | null;
-  market?: MarketDto;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CountryListDto {
-  title?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfCountryListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CountryListDto[] | null;
-}
-
-export interface CountryTranslationDto {
-  title?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditCountryDto {
-  /** @format int32 */
-  id?: number | null;
-  translations?: CountryTranslationDto[] | null;
-}
-
-export interface GetForEditCountryDto {
-  /** @format int32 */
-  id?: number | null;
-  translations?: CountryTranslationDto[] | null;
-}
-
-export interface CourseListDto {
-  title?: string | null;
-  description?: string | null;
-  coverImage?: string | null;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  courseMediasCount?: number;
-
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  position?: number;
-
-  /** @format double */
-  price?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfCourseListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CourseListDto[] | null;
-}
-
-export interface CourseTranslationDto {
-  overview?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditCourseDto {
-  /** @format int32 */
-  id?: number | null;
-  title?: string | null;
-  description?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  position?: number;
-
-  /** @format double */
-  price?: number;
-  translations?: CourseTranslationDto[] | null;
-}
-
-export interface GetForEditCourseDto {
-  /** @format int32 */
-  id?: number | null;
-  title?: string | null;
-  description?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  position?: number;
-
-  /** @format double */
-  price?: number;
-  translations?: CourseTranslationDto[] | null;
-}
-
-export interface CoursesResourceListDto {
-  title?: string | null;
-  type?: CoursesResourceType;
-  url?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfCoursesResourceListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CoursesResourceListDto[] | null;
-}
-
-export interface CoursesResourceTranslationDto {
-  content?: string | null;
-  title?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditCoursesResourceDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  courseId?: number;
-  url?: string | null;
-
-  /** @format int32 */
-  position?: number;
-  type?: CoursesResourceType;
-  translations?: CoursesResourceTranslationDto[] | null;
-}
-
-export interface CourseLecturerDto {
-  /** @format int32 */
-  courseId?: number;
-
-  /** @format int32 */
-  lecturerId?: number;
-  lecturer?: LecturerDto;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface AddCourseLecturerInput {
-  /** @format int32 */
-  lecturerId?: number;
-
-  /** @format int32 */
-  courseId?: number;
-}
-
-export interface GetCoursesLiestOutput {
-  title?: string | null;
-  description?: string | null;
-
-  /** @format double */
-  price?: number;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  courseMediasCount?: number;
-
-  /** @format int32 */
-  likes?: number;
-  isLiked?: boolean;
-  access?: boolean;
-  state?: CourseUserState;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfGetCoursesLiestOutput {
-  /** @format int32 */
-  totalCount?: number;
-  items?: GetCoursesLiestOutput[] | null;
-}
-
-export interface WatchedCourseDto {
-  title?: string | null;
-  description?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  duration?: number;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  courseMediasCount?: number;
-
-  /** @format int32 */
-  seenDuration?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfWatchedCourseDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: WatchedCourseDto[] | null;
-}
-
-export interface CoursesReportDto {
-  /** @format int32 */
-  inProgress?: number;
-
-  /** @format int32 */
-  completed?: number;
-}
-
-export interface EntityDtoOfInt32 {
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CoursesMediaListDto {
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  address?: string | null;
-  mediaType?: string | null;
-
-  /** @format int32 */
-  courseId?: number;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfCoursesMediaListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: CoursesMediaListDto[] | null;
-}
-
-export interface CreateOrEditCoursesMediaDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  address?: string | null;
-  mediaType?: string | null;
-
-  /** @format int32 */
-  courseId?: number;
-  description?: string | null;
-}
-
-export interface GetForEditCoursesMediaDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  address?: string | null;
-  mediaType?: string | null;
-
-  /** @format int32 */
-  courseId?: number;
-  course?: CourseDto;
-  description?: string | null;
-}
-
-export interface CoursesMediaDto {
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  address?: string | null;
-  mediaType?: string | null;
-
-  /** @format int32 */
-  courseId?: number;
-  course?: CourseDto;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-  isLiked?: boolean;
-  isWatched?: boolean;
-
-  /** @format int32 */
-  watchedDuration?: number;
-  description?: string | null;
-  isCompleted?: boolean;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CoursesMediaArrowDto {
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  address?: string | null;
-  mediaType?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CoursesMediaSingleDto {
-  /** @format int32 */
-  duration?: number;
-
-  /** @format int32 */
-  position?: number;
-  title?: string | null;
-  address?: string | null;
-  mediaType?: string | null;
-
-  /** @format int32 */
-  courseId?: number;
-  course?: CourseDto;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-  isLiked?: boolean;
-  next?: CoursesMediaArrowDto;
-  previous?: CoursesMediaArrowDto;
-  isWatched?: boolean;
-
-  /** @format int32 */
-  watchedDuration?: number;
-  description?: string | null;
-  isCompleted?: boolean;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface CoursesMediaSeenInput {
-  /** @format int32 */
-  coursesMediaId?: number;
-
-  /** @format int32 */
-  duration?: number;
 }
 
 export interface Widget {
@@ -2111,15 +696,53 @@ export interface MoveTenantsToAnotherEditionDto {
   targetEditionId?: number;
 }
 
-export interface PagedResultDtoOfSimpleUserDto {
+export interface CreateFriendshipRequestInput {
+  /**
+   * @format int64
+   * @min 1
+   */
+  userId?: number;
+
   /** @format int32 */
-  totalCount?: number;
-  items?: SimpleUserDto[] | null;
+  tenantId?: number | null;
 }
 
-export interface EntityDtoOfInt64 {
-  /** @format int64 */
-  id?: number;
+export interface CreateFriendshipRequestByUserNameInput {
+  tenancyName: string;
+  userName?: string | null;
+}
+
+export interface BlockUserInput {
+  /**
+   * @format int64
+   * @min 1
+   */
+  userId?: number;
+
+  /** @format int32 */
+  tenantId?: number | null;
+}
+
+export interface UnblockUserInput {
+  /**
+   * @format int64
+   * @min 1
+   */
+  userId?: number;
+
+  /** @format int32 */
+  tenantId?: number | null;
+}
+
+export interface AcceptFriendshipRequestInput {
+  /**
+   * @format int64
+   * @min 1
+   */
+  userId?: number;
+
+  /** @format int32 */
+  tenantId?: number | null;
 }
 
 export interface TopStatsData {
@@ -2524,331 +1147,6 @@ export interface UpdateLanguageTextInput {
   value: string;
 }
 
-export interface LecturerListDto {
-  profilePicture?: string | null;
-  fullName?: string | null;
-  headline?: string | null;
-  bio?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfLecturerListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: LecturerListDto[] | null;
-}
-
-export interface CreateOrEditLecturerDto {
-  /** @format int32 */
-  id?: number | null;
-  profilePicture?: string | null;
-  fullName?: string | null;
-  headline?: string | null;
-  bio?: string | null;
-  cvAddress?: string | null;
-}
-
-export interface UpdateLecturerProfileInput {
-  fullName?: string | null;
-  headline?: string | null;
-  bio?: string | null;
-}
-
-export interface LibraryListDto {
-  title?: string | null;
-  coverImage?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfLibraryListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: LibraryListDto[] | null;
-}
-
-export interface LibraryTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditLibraryDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  coverImage?: string | null;
-  translations?: LibraryTranslationDto[] | null;
-}
-
-export interface GetForEditLibraryDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  coverImage?: string | null;
-  translations?: LibraryTranslationDto[] | null;
-}
-
-export interface LibraryDto {
-  title?: string | null;
-  coverImage?: string | null;
-  slug?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetLibrariesOutput {
-  title?: string | null;
-  coverImage?: string | null;
-  description?: string | null;
-  slug?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetChannelMenuOutput {
-  title?: string | null;
-  slug?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetLibrarySubjectMenuOutput {
-  title?: string | null;
-  slug?: string | null;
-  channels?: GetChannelMenuOutput[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetLibraryMenuOutput {
-  title?: string | null;
-  slug?: string | null;
-  subjects?: GetLibrarySubjectMenuOutput[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface LibrarySubjectListDto {
-  title?: string | null;
-  coverImage?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfLibrarySubjectListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: LibrarySubjectListDto[] | null;
-}
-
-export interface LibrarySubjectTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditLibrarySubjectDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  libraryId?: number;
-  translations?: LibrarySubjectTranslationDto[] | null;
-}
-
-export interface GetForEditLibrarySubjectDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  position?: number;
-  slug?: string | null;
-  coverImage?: string | null;
-
-  /** @format int32 */
-  libraryId?: number;
-  translations?: LibrarySubjectTranslationDto[] | null;
-}
-
-export interface LibrarySubjectDto {
-  title?: string | null;
-  coverImage?: string | null;
-  slug?: string | null;
-  description?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetLibrarySubjectsOutput {
-  title?: string | null;
-  coverImage?: string | null;
-  description?: string | null;
-  slug?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface NewsListDto {
-  title?: string | null;
-  coverImageAddress?: string | null;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfNewsListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: NewsListDto[] | null;
-}
-
-export interface CreateOrEditNewsDto {
-  /** @format int32 */
-  id?: number | null;
-  title?: string | null;
-  body?: string | null;
-  slug?: string | null;
-  coverImageAddress?: string | null;
-  categories?: number[] | null;
-
-  /** @format int32 */
-  languageId?: number | null;
-  authorAlias?: string | null;
-
-  /** @format int32 */
-  authorId?: number | null;
-}
-
-export interface GetForEditNewsDto {
-  /** @format int32 */
-  id?: number | null;
-  coverImageAddress?: string | null;
-  title?: string | null;
-  body?: string | null;
-  slug?: string | null;
-
-  /** @format int32 */
-  languageId?: number | null;
-  categories?: number[] | null;
-  authorAlias?: string | null;
-
-  /** @format int32 */
-  authorId?: number | null;
-}
-
-export interface CMSChangeStatusInput {
-  /** @format int32 */
-  id?: number;
-  isPublished?: boolean;
-}
-
-export interface AuthorDto {
-  fullName?: string | null;
-  logo?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface NewsTileDto {
-  title?: string | null;
-  body?: string | null;
-  slug?: string | null;
-  coverImageAddress?: string | null;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-  isLiked?: boolean;
-  categories?: CategoryDto[] | null;
-  author?: AuthorDto;
-
-  /** @format int64 */
-  views?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfNewsTileDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: NewsTileDto[] | null;
-}
-
-export interface NewsDto {
-  title?: string | null;
-  coverImageAddress?: string | null;
-  body?: string | null;
-  slug?: string | null;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-  isLiked?: boolean;
-
-  /** @format int64 */
-  views?: number;
-  categories?: CategoryDto[] | null;
-  author?: AuthorDto;
-
-  /** @format int32 */
-  id?: number;
-}
-
 /**
  * @format int32
  */
@@ -2937,260 +1235,6 @@ export interface NotificationSubscriptionDto {
 export interface UpdateNotificationSettingsInput {
   receiveNotifications?: boolean;
   notifications?: NotificationSubscriptionDto[] | null;
-}
-
-export interface EventTime2Dto {
-  /** @format date-time */
-  startDate?: string;
-
-  /** @format date-time */
-  finishDate?: string;
-
-  /** @format double */
-  price?: number;
-  description?: string | null;
-  location?: string | null;
-
-  /** @format int32 */
-  eventId?: number;
-  type?: EventTimeType;
-  event?: EventListDto;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface OrderListDto {
-  owner?: SimpleUserDto;
-  isPaid?: boolean;
-
-  /** @format double */
-  subTotalPrice?: number;
-
-  /** @format double */
-  totalPrice?: number;
-  channel?: ChannelDto;
-  course?: CourseListDto;
-  eventTime?: EventTime2Dto;
-
-  /** @format int32 */
-  participants?: number;
-  allCoureAccess?: boolean;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  courseId?: number | null;
-
-  /** @format int32 */
-  eventTimeId?: number | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfOrderListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: OrderListDto[] | null;
-}
-
-export interface AddressInfoDto {
-  firstName?: string | null;
-  lastName?: string | null;
-  city?: string | null;
-  country?: string | null;
-  address1?: string | null;
-  address2?: string | null;
-  zipCode?: string | null;
-  phoneNumber?: string | null;
-  email?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-/**
- * @format int32
- */
-export enum PromoCodeType {
-  PercentageOfTotal = 0,
-}
-
-/**
- * @format int32
- */
-export enum SexTitle {
-  Mr = 0,
-  Mrs = 10,
-}
-
-export interface ParticipantDto {
-  title?: SexTitle;
-  firstName?: string | null;
-  lastName?: string | null;
-  phoneNumber?: string | null;
-  email?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-/**
- * @format int32
- */
-export enum PaymentMethod {
-  Credit = 10,
-  PaymentGateway = 20,
-  ByAdmin = 30,
-}
-
-/**
- * @format int32
- */
-export enum PaymentGateway {
-  Stripe = 10,
-  Paypal = 20,
-  EPSDirect = 30,
-  Amazon = 40,
-  ApplePay = 50,
-  GooglePay = 60,
-}
-
-/**
- * @format int32
- */
-export enum PaymentStatus {
-  Successful = 10,
-  Faild = 20,
-}
-
-export interface PaymentDto {
-  /** @format int32 */
-  orderId?: number;
-
-  /** @format double */
-  totalPrice?: number;
-
-  /** @format int64 */
-  creatorUserId?: number | null;
-  isPaid?: boolean;
-  message?: string | null;
-  method?: PaymentMethod;
-  gateway?: PaymentGateway;
-  status?: PaymentStatus;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int64 */
-  deleterUserId?: number | null;
-
-  /** @format date-time */
-  deletionTime?: string | null;
-  isDeleted?: boolean;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface GetForEditOrderDto {
-  /** @format int32 */
-  id?: number | null;
-
-  /** @format int32 */
-  addressId?: number | null;
-  address?: AddressInfoDto;
-
-  /** @format int32 */
-  billingAddressId?: number | null;
-  billingAddress?: AddressInfoDto;
-
-  /** @format int64 */
-  ownerId?: number;
-  owner?: SimpleUserDto;
-  isPaid?: boolean;
-
-  /** @format double */
-  subTotalPrice?: number;
-
-  /** @format double */
-  totalPrice?: number;
-
-  /** @format int32 */
-  promoCodeId?: number | null;
-
-  /** @format double */
-  promoCodeValue?: number;
-  promoCodeType?: PromoCodeType;
-  channel?: ChannelDto;
-  course?: CourseListDto;
-  eventTime?: EventTime2Dto;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  courseId?: number | null;
-
-  /** @format int32 */
-  eventTimeId?: number | null;
-  participants?: ParticipantDto[] | null;
-  payments?: PaymentDto[] | null;
-  allCoureAccess?: boolean;
-}
-
-export interface NewOrderByAdminInput {
-  address?: AddressInfoDto;
-  billingAddress?: AddressInfoDto;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  courseId?: number | null;
-
-  /** @format int32 */
-  eventTimeId?: number | null;
-  participants?: ParticipantDto[] | null;
-
-  /** @format int64 */
-  ownerId?: number;
-  allCoureAccess?: boolean;
-}
-
-/**
- * @format int32
- */
-export type TypeDefinitionsInt32 = number;
-
-export interface NewOrderInput {
-  address?: AddressInfoDto;
-  billingAddress?: AddressInfoDto;
-
-  /** @format int32 */
-  channelId?: number | null;
-
-  /** @format int32 */
-  courseId?: number | null;
-
-  /** @format int32 */
-  eventTimeId?: number | null;
-  participants?: ParticipantDto[] | null;
-}
-
-export interface CreateOrderOutput {
-  /** @format int32 */
-  orderId?: number;
-  secretKey?: string | null;
-
-  /** @format int64 */
-  transactionId?: number;
-
-  /** @format double */
-  amount?: number;
-  currency?: string | null;
 }
 
 export interface OrganizationUnitDto {
@@ -3543,62 +1587,154 @@ export interface ListResultDtoOfFlatPermissionWithLevelDto {
   items?: FlatPermissionWithLevelDto[] | null;
 }
 
-export interface PodcastListDto {
-  title?: string | null;
+export interface PlanEditDto {
+  /** @format int32 */
+  id?: number | null;
+  title: string;
   description?: string | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  data?: string | null;
 
-  /** @format date-time */
-  creationTime?: string;
+  /** @format date-span */
+  duration?: string;
+
+  /** @format double */
+  price?: number;
+}
+
+export interface CreateOrUpdatePlanInput {
+  plan: PlanEditDto;
+}
+
+export interface GetPlanForEditOutput {
+  plan?: PlanEditDto;
+}
+
+export interface PlanListDto {
+  title?: string | null;
+
+  /** @format date-span */
+  duration?: string;
+
+  /** @format double */
+  price?: number;
 
   /** @format int32 */
   id?: number;
 }
 
-export interface PagedResultDtoOfPodcastListDto {
+export interface PagedResultDtoOfPlanListDto {
   /** @format int32 */
   totalCount?: number;
-  items?: PodcastListDto[] | null;
+  items?: PlanListDto[] | null;
 }
 
-export interface PodcastTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
+/**
+ * @format int32
+ */
+export enum ProductOrderType {
+  Subscribable = 0,
+  NonSubscribable = 1,
 }
 
-export interface CreateOrEditPodcastDto {
+/**
+ * @format int32
+ */
+export enum ProductGroup {
+  Other = 0,
+  Bike = 10,
+}
+
+/**
+ * @format int32
+ */
+export enum ProductState {
+  UnPublished = 0,
+  Published = 10,
+}
+
+export interface ProductEditDto {
   /** @format int32 */
   id?: number | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  data?: string | null;
-  translations?: PodcastTranslationDto[] | null;
+  title: string;
+
+  /** @format date-span */
+  deliveryTime?: string;
+  orderType?: ProductOrderType;
+  group?: ProductGroup;
+  state?: ProductState;
 }
 
-export interface GetForEditPodcastDto {
+export interface CreateOrUpdateProductInput {
+  product: ProductEditDto;
+}
+
+export interface AssignPlanToProductInput {
   /** @format int32 */
-  id?: number | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  data?: string | null;
-  translations?: PodcastTranslationDto[] | null;
+  productId?: number;
+
+  /** @format int32 */
+  planId?: number;
 }
 
-export interface PodcastDto {
-  title?: string | null;
-  description?: string | null;
-  thumbnailImageAddress?: string | null;
-  coverImageAddress?: string | null;
-  data?: string | null;
+export interface ProductImageDto {
+  /** @format int32 */
+  productId?: number;
+  imageSrc?: string | null;
 
-  /** @format date-time */
-  creationTime?: string;
+  /** @format int32 */
+  postition?: number;
 
   /** @format int32 */
   id?: number;
+}
+
+export interface ProductAttributeDto {
+  /** @format int32 */
+  productId?: number;
+  attribute?: AttributeDto;
+
+  /** @format int32 */
+  attributeId?: number;
+  value?: string | null;
+}
+
+export interface GetProductForEditOutput {
+  product?: ProductEditDto;
+}
+
+export interface EntityDto {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ProductListDto {
+  title?: string | null;
+
+  /** @format date-span */
+  deliveryTime?: string;
+  orderType?: ProductOrderType;
+  group?: ProductGroup;
+  state?: ProductState;
+
+  /** @format int32 */
+  id?: number;
+}
+
+export interface PagedResultDtoOfProductListDto {
+  /** @format int32 */
+  totalCount?: number;
+  items?: ProductListDto[] | null;
+}
+
+export interface PagedResultDtoOfProductImageDto {
+  /** @format int32 */
+  totalCount?: number;
+  items?: ProductImageDto[] | null;
+}
+
+export interface PagedResultDtoOfProductAttributeDto {
+  /** @format int32 */
+  totalCount?: number;
+  items?: ProductAttributeDto[] | null;
 }
 
 export interface CurrentUserProfileEditDto {
@@ -3611,10 +1747,6 @@ export interface CurrentUserProfileEditDto {
   timezone?: string | null;
   qrCodeSetupImageUrl?: string | null;
   isGoogleAuthenticatorEnabled?: boolean;
-  bio?: string | null;
-
-  /** @format int32 */
-  countryId?: number | null;
 }
 
 export interface UpdateGoogleAuthenticatorKeyOutput {
@@ -3635,6 +1767,23 @@ export interface ChangePasswordInput {
   newPassword: string;
 }
 
+export interface UpdateProfilePictureInput {
+  fileToken?: string | null;
+
+  /** @format int32 */
+  x?: number;
+
+  /** @format int32 */
+  y?: number;
+
+  /** @format int32 */
+  width?: number;
+
+  /** @format int32 */
+  height?: number;
+  useGravatarProfilePicture?: boolean;
+}
+
 export interface GetPasswordComplexitySettingOutput {
   setting?: PasswordComplexitySetting;
 }
@@ -3645,57 +1794,6 @@ export interface GetProfilePictureOutput {
 
 export interface ChangeUserLanguageDto {
   languageName: string;
-}
-
-export interface GetMyProfileDetailOutput {
-  name?: string | null;
-  surname?: string | null;
-  userName?: string | null;
-  emailAddress?: string | null;
-  phoneNumber?: string | null;
-  profilePictureAddress?: string | null;
-  isPhoneNumberConfirmed?: boolean;
-
-  /** @format int32 */
-  following?: number;
-
-  /** @format int32 */
-  followers?: number;
-  bio?: string | null;
-
-  /** @format int32 */
-  xp?: number;
-
-  /** @format int32 */
-  level?: number;
-  roles?: string[] | null;
-
-  /** @format int32 */
-  lecturerId?: number | null;
-  country?: CountryListDto;
-
-  /** @format int64 */
-  id?: number;
-}
-
-export interface GetProfileDetailOutput {
-  name?: string | null;
-  surname?: string | null;
-  userName?: string | null;
-  profilePictureAddress?: string | null;
-
-  /** @format int32 */
-  following?: number;
-
-  /** @format int32 */
-  followers?: number;
-  isMine?: boolean;
-  bio?: string | null;
-  isFollowing?: boolean;
-  country?: CountryListDto;
-
-  /** @format int64 */
-  id?: number;
 }
 
 export interface GetRolesInput {
@@ -3891,63 +1989,6 @@ export interface UpdateUserSignInTokenOutput {
   encodedTenantId?: string | null;
 }
 
-/**
- * @format int32
- */
-export enum SiteMenuType {
-  MenuItem = 0,
-  Divider = 10,
-  HeaderTitle = 20,
-}
-
-export interface SiteMenuDto {
-  title?: string | null;
-  description?: string | null;
-  url?: string | null;
-
-  /** @format int32 */
-  parentId?: number | null;
-  type?: SiteMenuType;
-  subMenus?: SiteMenuDto[] | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface SiteMenuTranslationDto {
-  title?: string | null;
-  description?: string | null;
-  language?: string | null;
-}
-
-export interface CreateOrEditSiteMenuDto {
-  /** @format int32 */
-  id?: number | null;
-  translations?: SiteMenuTranslationDto[] | null;
-
-  /** @format int32 */
-  position?: number;
-  url?: string | null;
-
-  /** @format int32 */
-  parentId?: number | null;
-  type?: SiteMenuType;
-}
-
-export interface GetForEditSiteMenuDto {
-  /** @format int32 */
-  id?: number | null;
-  translations?: SiteMenuTranslationDto[] | null;
-
-  /** @format int32 */
-  position?: number;
-  url?: string | null;
-
-  /** @format int32 */
-  parentId?: number | null;
-  type?: SiteMenuType;
-}
-
 export interface StripeConfigurationDto {
   publishableKey?: string | null;
 }
@@ -3961,22 +2002,6 @@ export interface StripeCreatePaymentSessionInput {
 
 export interface StripePaymentResultOutput {
   paymentDone?: boolean;
-}
-
-export interface TagsListDto {
-  label?: string | null;
-
-  /** @format int32 */
-  tweets?: number;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfTagsListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: TagsListDto[] | null;
 }
 
 export interface TenantListDto {
@@ -4057,11 +2082,6 @@ export interface UpdateTenantFeaturesInput {
    */
   id?: number;
   featureValues: NameValueDto[];
-}
-
-export interface EntityDto {
-  /** @format int32 */
-  id?: number;
 }
 
 export interface MemberActivity {
@@ -4201,91 +2221,6 @@ export interface GetGeneralStatsOutput {
 
   /** @format int32 */
   bouncePercent?: number;
-}
-
-export interface GetCountBoxOutput {
-  /** @format int32 */
-  podcastsCount?: number;
-
-  /** @format int32 */
-  coursesCount?: number;
-
-  /** @format int32 */
-  companiesCount?: number;
-
-  /** @format int32 */
-  newsCount?: number;
-}
-
-export interface GetNewUsersOutput {
-  usersCountPerDay?: number[] | null;
-  lables?: string[] | null;
-
-  /** @format int64 */
-  totalUsersCount?: number;
-}
-
-export interface GetNewTweetsOutput {
-  tweetsCountPerDay?: number[] | null;
-  lables?: string[] | null;
-
-  /** @format int32 */
-  totalTweetsCount?: number;
-}
-
-export interface GetNewCommentsOutput {
-  commentsCountPerDay?: number[] | null;
-  lables?: string[] | null;
-
-  /** @format int32 */
-  totalCommentsCount?: number;
-}
-
-export interface TagDto {
-  label?: string | null;
-
-  /** @format int32 */
-  id?: number;
-}
-
-export interface TweetDto {
-  content?: string | null;
-  creatorUser?: SimpleUserDto;
-
-  /** @format int32 */
-  companyId?: number | null;
-  company?: CompanyDto;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-  tags?: TagDto[] | null;
-  isLiked?: boolean;
-  attachment?: string | null;
-  attachmentType?: string | null;
-  baseAddress?: string | null;
-
-  /** @format int64 */
-  id?: number;
-}
-
-export interface GetTopTweetOutput {
-  tweet?: TweetDto;
-  any?: boolean;
-}
-
-export interface GetTopCoursesOutput {
-  chartLables?: string[] | null;
-  chartDatas?: number[] | null;
-
-  /** @format int32 */
-  totalCoursesViews?: number;
-  topCourses?: CourseDto[] | null;
 }
 
 /**
@@ -4506,75 +2441,6 @@ export interface ExternalAuthenticateResultModel {
   refreshTokenExpireInSeconds?: number;
 }
 
-export interface TweetListDto {
-  content?: string | null;
-  creatorUser?: SimpleUserDto;
-
-  /** @format date-time */
-  creationTime?: string;
-
-  /** @format int32 */
-  likes?: number;
-
-  /** @format int32 */
-  comments?: number;
-
-  /** @format int64 */
-  id?: number;
-}
-
-export interface PagedResultDtoOfTweetListDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: TweetListDto[] | null;
-}
-
-export interface CreateOrEditTweetDto {
-  /** @format int64 */
-  id?: number | null;
-  content?: string | null;
-
-  /** @format int32 */
-  companyId?: number | null;
-}
-
-export interface GetForEditTweetDto {
-  /** @format int64 */
-  id?: number | null;
-  content?: string | null;
-
-  /** @format int32 */
-  companyId?: number | null;
-  creatorUser?: SimpleUserDto;
-
-  /** @format date-time */
-  creationTime?: string;
-  attachment?: string | null;
-  attachmentType?: string | null;
-}
-
-export interface PagedResultDtoOfTweetDto {
-  /** @format int32 */
-  totalCount?: number;
-  items?: TweetDto[] | null;
-}
-
-export interface SendNewTweetDto {
-  content?: string | null;
-
-  /** @format int32 */
-  companyId?: number | null;
-  attachment?: string | null;
-  attachmentType?: string | null;
-}
-
-export interface UploadAttachmentOutput {
-  attachment?: string | null;
-  attachmentType?: string | null;
-  succeed?: boolean;
-  baseAddress?: string | null;
-}
-
 export interface TwitterGetRequestTokenResponse {
   token?: string | null;
   secret?: string | null;
@@ -4659,9 +2525,6 @@ export interface UserEditDto {
   phoneNumber?: string | null;
   password?: string | null;
   isActive?: boolean;
-
-  /** @format int32 */
-  lecturerId?: number | null;
   shouldChangePasswordOnNextLogin?: boolean;
   isTwoFactorEnabled?: boolean;
   isLockoutEnabled?: boolean;
@@ -4690,6 +2553,11 @@ export interface GetUserPermissionsForEditOutput {
   grantedPermissionNames?: string[] | null;
 }
 
+export interface EntityDtoOfInt64 {
+  /** @format int64 */
+  id?: number;
+}
+
 export interface UpdateUserPermissionsInput {
   /**
    * @format int64
@@ -4705,9 +2573,6 @@ export interface CreateOrUpdateUserInput {
   assignedRoleNames: string[];
   sendActivationEmail?: boolean;
   setRandomPassword?: boolean;
-
-  /** @format int32 */
-  lecturerId?: number | null;
   organizationUnits?: number[] | null;
 }
 
@@ -4972,27 +2837,19 @@ export interface GetLatestWebLogsOutput {
   latestWebLogLines?: string[] | null;
 }
 
-export interface ApiServicesAppBceventGetlatestGetParams {
+export interface ApiServicesAppAttributeGetattributesforselectionGetParams {
   /** @format int32 */
-  count?: number;
+  ProductId?: number;
+  SearchTerm?: string | null;
 }
 
-export interface ApiServicesAppBceventGetlatestbycategoryGetParams {
+export interface ApiServicesAppAttributeGetGetParams {
   /** @format int32 */
-  CategoryMaxCount?: number;
-
-  /** @format int32 */
-  ListMinCount?: number;
-
-  /** @format int32 */
-  ListMaxCount?: number;
+  Id?: number;
 }
 
-export interface ApiServicesAppBceventGeteventslistGetParams {
+export interface ApiServicesAppAttributeGetallGetParams {
   Filter?: string | null;
-
-  /** @format int32 */
-  CategoryId?: number | null;
   Sorting?: string | null;
 
   /**
@@ -5010,66 +2867,29 @@ export interface ApiServicesAppBceventGeteventslistGetParams {
   SkipCount?: number;
 }
 
-export interface ApiServicesAppBceventGeteventGetParams {
+export interface ApiServicesAppAttributeDeleteDeleteParams {
   /** @format int32 */
   Id?: number;
 }
 
-export interface ApiServicesAppBctestGettestsGetParams {
+export interface ApiServicesAppAuditlogGetauditlogsGetParams {
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+  UserName?: string | null;
+  ServiceName?: string | null;
+  MethodName?: string | null;
+  BrowserInfo?: string | null;
+  HasException?: boolean | null;
+
   /** @format int32 */
-  CourseId?: number;
-}
+  MinExecutionDuration?: number | null;
 
-export interface ApiServicesAppBctestGettestGetParams {
   /** @format int32 */
-  Id?: number;
-}
-
-export interface ApiServicesAppBctestParticipatePostParams {
-  /** @format int32 */
-  testId?: number;
-}
-
-export interface ApiServicesAppBlobdirectoryGetcontentGetParams {
-  type: BlobType;
-  Path?: string | null;
-}
-
-export interface ApiServicesAppBlobdirectoryCreatedirectoryPostParams {
-  Path?: BlobType;
-}
-
-export interface ApiServicesAppBlobdirectoryCreatefilePostParams {
-  Path?: BlobType;
-}
-
-export interface ApiServicesAppBlobdirectoryDeletedirectoryDeleteParams {
-  type: BlobType;
-  Path?: string | null;
-}
-
-export interface ApiServicesAppBlobdirectoryDeletefileDeleteParams {
-  type: BlobType;
-  Path?: string | null;
-}
-
-export interface ApiServicesAppCategoryGetcategoriesGetParams {
-  Type?: CategoryType;
-}
-
-export interface ApiServicesAppChannelGetchannelsGetParams {
-  /** @format int32 */
-  SubjectId?: number | null;
-}
-
-export interface ApiServicesAppChannelGetchannelGetParams {
-  /** @format int32 */
-  ChannelId?: number;
-}
-
-export interface ApiServicesAppCommentGetnewscommentGetParams {
-  /** @format int32 */
-  Id?: number;
+  MaxExecutionDuration?: number | null;
+  Sorting?: string | null;
 
   /**
    * @format int32
@@ -5086,9 +2906,24 @@ export interface ApiServicesAppCommentGetnewscommentGetParams {
   SkipCount?: number;
 }
 
-export interface ApiServicesAppCommentGetcoursemediacommentGetParams {
+export interface ApiServicesAppAuditlogGetauditlogstoexcelGetParams {
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+  UserName?: string | null;
+  ServiceName?: string | null;
+  MethodName?: string | null;
+  BrowserInfo?: string | null;
+  HasException?: boolean | null;
+
   /** @format int32 */
-  Id?: number;
+  MinExecutionDuration?: number | null;
+
+  /** @format int32 */
+  MaxExecutionDuration?: number | null;
+  Sorting?: string | null;
 
   /**
    * @format int32
@@ -5105,128 +2940,276 @@ export interface ApiServicesAppCommentGetcoursemediacommentGetParams {
   SkipCount?: number;
 }
 
-export interface ApiServicesAppCommentGettweetcommentGetParams {
+export interface ApiServicesAppAuditlogGetentitychangesGetParams {
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+  UserName?: string | null;
+  EntityTypeFullName?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppAuditlogGetentitytypechangesGetParams {
+  EntityTypeFullName?: string | null;
+  EntityId?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppAuditlogGetentitychangestoexcelGetParams {
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+  UserName?: string | null;
+  EntityTypeFullName?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppAuditlogGetentitypropertychangesGetParams {
   /** @format int64 */
-  Id?: number;
+  entityChangeId?: number;
+}
+
+export interface ApiServicesAppChatGetuserchatmessagesGetParams {
+  /** @format int32 */
+  TenantId?: number | null;
 
   /**
-   * @format int32
+   * @format int64
    * @min 1
-   * @max 1000
    */
-  MaxResultCount?: number;
+  UserId?: number;
 
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
+  /** @format int64 */
+  MinMessageId?: number | null;
 }
 
-export interface ApiServicesAppCommentGetsinglecommentGetParams {
-  /** @format int32 */
-  Id?: number;
+export interface ApiServicesAppCommonlookupGeteditionsforcomboboxGetParams {
+  onlyFreeItems?: boolean;
 }
 
-export interface ApiServicesAppCommentDeleteDeleteParams {
-  /** @format int32 */
-  Id?: number;
+export interface ApiServicesAppDashboardcustomizationGetuserdashboardGetParams {
+  DashboardName?: string | null;
+  Application?: string | null;
 }
 
-export interface ApiServicesAppCompanySearchPostParams {
-  term?: string | null;
+export interface ApiServicesAppDashboardcustomizationDeletepageDeleteParams {
+  Id?: string | null;
+  DashboardName?: string | null;
+  Application?: string | null;
 }
 
-export interface ApiServicesAppCourseGetcoursesGetParams {
-  /** @format int32 */
-  ChannelId?: number;
-
-  /**
-   * @format int32
-   * @min 1
-   * @max 1000
-   */
-  MaxResultCount?: number;
-
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
+export interface ApiServicesAppDashboardcustomizationGetdashboarddefinitionGetParams {
+  DashboardName?: string | null;
+  Application?: string | null;
 }
 
-export interface ApiServicesAppCourseGetwatchedcoursesGetParams {
-  /** @format int32 */
-  ChannelId?: number;
-
-  /**
-   * @format int32
-   * @min 1
-   * @max 1000
-   */
-  MaxResultCount?: number;
-
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
+export interface ApiServicesAppDashboardcustomizationGetallwidgetdefinitionsGetParams {
+  DashboardName?: string | null;
+  Application?: string | null;
 }
 
-export interface ApiServicesAppCourseGetsingleGetParams {
+export interface ApiServicesAppDashboardcustomizationGetsettingnameGetParams {
+  application?: string | null;
+}
+
+export interface ApiServicesAppDemouicomponentsSendandgetdatePostParams {
+  /** @format date-time */
+  date?: string | null;
+}
+
+export interface ApiServicesAppDemouicomponentsSendandgetdatetimePostParams {
+  /** @format date-time */
+  date?: string | null;
+}
+
+export interface ApiServicesAppDemouicomponentsSendandgetdaterangePostParams {
+  /** @format date-time */
+  startDate?: string | null;
+
+  /** @format date-time */
+  endDate?: string | null;
+}
+
+export interface ApiServicesAppDemouicomponentsGetcountriesGetParams {
+  searchTerm?: string | null;
+}
+
+export interface ApiServicesAppDemouicomponentsSendandgetvaluePostParams {
+  input?: string | null;
+}
+
+export interface ApiServicesAppDynamicentitypropertyGetGetParams {
   /** @format int32 */
   id?: number;
 }
 
-export interface ApiServicesAppCoursesmediaGetcoursesmediasGetParams {
+export interface ApiServicesAppDynamicentitypropertyGetallpropertiesofanentityGetParams {
+  EntityFullName?: string | null;
+}
+
+export interface ApiServicesAppDynamicentitypropertyDeleteDeleteParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppDynamicentitypropertyvalueGetGetParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppDynamicentitypropertyvalueGetallGetParams {
+  EntityId?: string | null;
+
+  /** @format int32 */
+  PropertyId?: number;
+}
+
+export interface ApiServicesAppDynamicentitypropertyvalueDeleteDeleteParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppDynamicentitypropertyvalueGetalldynamicentitypropertyvaluesGetParams {
+  EntityFullName: string;
+  EntityId: string;
+}
+
+export interface ApiServicesAppDynamicpropertyGetGetParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppDynamicpropertyDeleteDeleteParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppDynamicpropertyFindallowedinputtypePostParams {
+  name?: string | null;
+}
+
+export interface ApiServicesAppDynamicpropertyvalueGetGetParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppDynamicpropertyvalueGetallvaluesofdynamicpropertyGetParams {
   /** @format int32 */
   Id?: number;
 }
 
-export interface ApiServicesAppCoursesmediaGetsingleGetParams {
+export interface ApiServicesAppDynamicpropertyvalueDeleteDeleteParams {
+  /** @format int32 */
+  id?: number;
+}
+
+export interface ApiServicesAppEditionGeteditionforeditGetParams {
+  /** @format int32 */
+  Id?: number | null;
+}
+
+export interface ApiServicesAppEditionDeleteeditionDeleteParams {
   /** @format int32 */
   Id?: number;
 }
 
-export interface ApiServicesAppFollowerrelationshipGetfollowinglistGetParams {
-  /** @format int64 */
-  UserId?: number | null;
-
-  /**
-   * @format int32
-   * @min 1
-   * @max 1000
-   */
-  MaxResultCount?: number;
-
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
+export interface ApiServicesAppEditionGeteditioncomboboxitemsGetParams {
+  /** @format int32 */
+  selectedEditionId?: number | null;
+  addAllItem?: boolean;
+  onlyFreeItems?: boolean;
 }
 
-export interface ApiServicesAppFollowerrelationshipGetfollowerlistGetParams {
+export interface ApiServicesAppEditionGettenantcountGetParams {
+  /** @format int32 */
+  editionId?: number;
+}
+
+export interface ApiServicesAppHostdashboardGettopstatsdataGetParams {
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+}
+
+export interface ApiServicesAppHostdashboardGetincomestatisticsGetParams {
+  IncomeStatisticsDateInterval: ChartDateInterval;
+
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+}
+
+export interface ApiServicesAppHostdashboardGeteditiontenantstatisticsGetParams {
+  /** @format date-time */
+  StartDate?: string;
+
+  /** @format date-time */
+  EndDate?: string;
+}
+
+export interface ApiServicesAppInvoiceGetinvoiceinfoGetParams {
   /** @format int64 */
-  UserId?: number | null;
+  Id?: number;
+}
 
-  /**
-   * @format int32
-   * @min 1
-   * @max 1000
-   */
-  MaxResultCount?: number;
+export interface ApiServicesAppLanguageGetlanguageforeditGetParams {
+  /** @format int32 */
+  Id?: number | null;
+}
 
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
+export interface ApiServicesAppLanguageDeletelanguageDeleteParams {
+  /** @format int32 */
+  Id?: number;
 }
 
 export interface ApiServicesAppLanguageGetlanguagetextsGetParams {
@@ -5249,80 +3232,6 @@ export interface ApiServicesAppLanguageGetlanguagetextsGetParams {
   TargetLanguageName: string;
   TargetValueFilter?: string | null;
   FilterText?: string | null;
-}
-
-export interface ApiServicesAppLanguageGetlanguagetextsfromcashGetParams {
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  MaxResultCount?: number;
-
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
-  Sorting?: string | null;
-  SourceName: string;
-  BaseLanguageName?: string | null;
-  TargetLanguageName: string;
-  TargetValueFilter?: string | null;
-  FilterText?: string | null;
-}
-
-export interface ApiServicesAppLecturerGetlecturerGetParams {
-  /** @format int32 */
-  Id?: number;
-}
-
-export interface ApiServicesAppLibrarysubjectGetsubjectsGetParams {
-  /** @format int32 */
-  LibraryId?: number | null;
-}
-
-export interface ApiServicesAppNewsGetrelatedGetParams {
-  /** @format int32 */
-  Id?: number;
-}
-
-export interface ApiServicesAppNewsGetlatestnewsGetParams {
-  /** @format int32 */
-  count?: number;
-}
-
-export interface ApiServicesAppNewsGetmostengagednewsGetParams {
-  /** @format int32 */
-  count?: number;
-}
-
-export interface ApiServicesAppNewsGetnewslistGetParams {
-  Filter?: string | null;
-
-  /** @format int32 */
-  CategoryId?: number | null;
-  Sorting?: string | null;
-
-  /**
-   * @format int32
-   * @min 1
-   * @max 1000
-   */
-  MaxResultCount?: number;
-
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
-}
-
-export interface ApiServicesAppNewsGetsinglenewsGetParams {
-  /** @format int32 */
-  Id?: number;
 }
 
 export interface ApiServicesAppNotificationGetusernotificationsGetParams {
@@ -5364,7 +3273,14 @@ export interface ApiServicesAppNotificationDeleteallusernotificationsDeleteParam
   EndDate?: string | null;
 }
 
-export interface ApiServicesAppPodcastGetpodcastsGetParams {
+export interface ApiServicesAppOrganizationunitGetorganizationunitusersGetParams {
+  /**
+   * @format int64
+   * @min 1
+   */
+  Id?: number;
+  Sorting?: string | null;
+
   /**
    * @format int32
    * @min 1
@@ -5380,18 +3296,393 @@ export interface ApiServicesAppPodcastGetpodcastsGetParams {
   SkipCount?: number;
 }
 
-export interface ApiServicesAppPodcastGetpodcastGetParams {
-  /** @format int32 */
-  id?: number;
+export interface ApiServicesAppOrganizationunitGetorganizationunitrolesGetParams {
+  /**
+   * @format int64
+   * @min 1
+   */
+  Id?: number;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
 }
 
-export interface ApiServicesAppProfileGetprofiledetailGetParams {
+export interface ApiServicesAppOrganizationunitDeleteorganizationunitDeleteParams {
+  /** @format int64 */
+  Id?: number;
+}
+
+export interface ApiServicesAppOrganizationunitRemoveuserfromorganizationunitDeleteParams {
+  /**
+   * @format int64
+   * @min 1
+   */
+  UserId?: number;
+
+  /**
+   * @format int64
+   * @min 1
+   */
+  OrganizationUnitId?: number;
+}
+
+export interface ApiServicesAppOrganizationunitRemoverolefromorganizationunitDeleteParams {
+  /**
+   * @format int32
+   * @min 1
+   */
+  RoleId?: number;
+
+  /**
+   * @format int64
+   * @min 1
+   */
+  OrganizationUnitId?: number;
+}
+
+export interface ApiServicesAppPaymentGetpaymentinfoGetParams {
+  /** @format int32 */
+  UpgradeEditionId?: number | null;
+}
+
+export interface ApiServicesAppPaymentGetpaymenthistoryGetParams {
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppPaymentGetactivegatewaysGetParams {
+  RecurringPaymentsEnabled?: boolean | null;
+}
+
+export interface ApiServicesAppPaymentGetpaymentGetParams {
+  /** @format int64 */
+  paymentId?: number;
+}
+
+export interface ApiServicesAppPaymentBuynowsucceedPostParams {
+  /** @format int64 */
+  paymentId?: number;
+}
+
+export interface ApiServicesAppPaymentNewregistrationsucceedPostParams {
+  /** @format int64 */
+  paymentId?: number;
+}
+
+export interface ApiServicesAppPaymentUpgradesucceedPostParams {
+  /** @format int64 */
+  paymentId?: number;
+}
+
+export interface ApiServicesAppPaymentExtendsucceedPostParams {
+  /** @format int64 */
+  paymentId?: number;
+}
+
+export interface ApiServicesAppPaymentPaymentfailedPostParams {
+  /** @format int64 */
+  paymentId?: number;
+}
+
+export interface ApiServicesAppPaymentSwitchbetweenfreeeditionsPostParams {
+  /** @format int32 */
+  upgradeEditionId?: number;
+}
+
+export interface ApiServicesAppPaymentUpgradesubscriptioncostslessthenminamountPostParams {
+  /** @format int32 */
+  editionId?: number;
+}
+
+export interface ApiServicesAppPaypalpaymentConfirmpaymentPostParams {
+  /** @format int64 */
+  paymentId?: number;
+  paypalOrderId?: string | null;
+}
+
+export interface ApiServicesAppPlanDeleteplanDeleteParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppPlanGetplanforeditGetParams {
+  /** @format int32 */
+  Id?: number | null;
+}
+
+export interface ApiServicesAppPlanGetplansGetParams {
+  Filter?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppProductDeleteproductDeleteParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppProductDeleteproductplanDeleteParams {
+  /** @format int32 */
+  ProductId?: number;
+
+  /** @format int32 */
+  PlanId?: number;
+}
+
+export interface ApiServicesAppProductDeleteproductimageDeleteParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppProductDeleteproductattributeDeleteParams {
+  /** @format int32 */
+  ProductId?: number;
+
+  /** @format int32 */
+  AttributeId?: number;
+}
+
+export interface ApiServicesAppProductGetproductforeditGetParams {
+  /** @format int32 */
+  Id?: number | null;
+}
+
+export interface ApiServicesAppProductGetproductGetParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppProductGetproductsGetParams {
+  Filter?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppProductGetproductplansGetParams {
+  /** @format int32 */
+  ProductId?: number;
+  Filter?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppProductGetproductimagesGetParams {
+  /** @format int32 */
+  ProductId?: number;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppProductGetproductattributesGetParams {
+  /** @format int32 */
+  ProductId?: number;
+  Filter?: string | null;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppProductGetproductattributeforeditGetParams {
+  /** @format int32 */
+  ProductId?: number;
+
+  /** @format int32 */
+  AttributeId?: number | null;
+}
+
+export interface ApiServicesAppProfileGetprofilepicturebyusernameGetParams {
+  username?: string | null;
+}
+
+export interface ApiServicesAppProfileGetfriendprofilepictureGetParams {
+  /** @format int64 */
+  UserId?: number;
+
+  /** @format int32 */
+  TenantId?: number | null;
+}
+
+export interface ApiServicesAppProfileGetprofilepicturebyuserGetParams {
   /** @format int64 */
   userId?: number;
 }
 
-export interface ApiServicesAppTagSearchPostParams {
-  term?: string | null;
+export interface ApiServicesAppRoleGetroleforeditGetParams {
+  /** @format int32 */
+  Id?: number | null;
+}
+
+export interface ApiServicesAppRoleDeleteroleDeleteParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppStripepaymentGetpaymentGetParams {
+  StripeSessionId?: string | null;
+}
+
+export interface ApiServicesAppStripepaymentGetpaymentresultGetParams {
+  /** @format int64 */
+  PaymentId?: number;
+}
+
+export interface ApiServicesAppTenantGettenantsGetParams {
+  Filter?: string | null;
+
+  /** @format date-time */
+  SubscriptionEndDateStart?: string | null;
+
+  /** @format date-time */
+  SubscriptionEndDateEnd?: string | null;
+
+  /** @format date-time */
+  CreationDateStart?: string | null;
+
+  /** @format date-time */
+  CreationDateEnd?: string | null;
+
+  /** @format int32 */
+  EditionId?: number | null;
+  EditionIdSpecified?: boolean;
+  Sorting?: string | null;
+
+  /**
+   * @format int32
+   * @min 1
+   * @max 1000
+   */
+  MaxResultCount?: number;
+
+  /**
+   * @format int32
+   * @min 0
+   * @max 2147483647
+   */
+  SkipCount?: number;
+}
+
+export interface ApiServicesAppTenantGettenantforeditGetParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppTenantDeletetenantDeleteParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppTenantGettenantfeaturesforeditGetParams {
+  /** @format int32 */
+  Id?: number;
+}
+
+export interface ApiServicesAppTenantdashboardGetdashboarddataGetParams {
+  SalesSummaryDatePeriod: SalesSummaryDatePeriod;
+}
+
+export interface ApiServicesAppTenantdashboardGetsalessummaryGetParams {
+  SalesSummaryDatePeriod: SalesSummaryDatePeriod;
+}
+
+export interface ApiServicesAppTenantregistrationGeteditionGetParams {
+  /** @format int32 */
+  editionId?: number;
+}
+
+export interface ApiServicesAppTimingGettimezonesGetParams {
+  DefaultTimezoneScope: SettingScopes;
+}
+
+export interface ApiServicesAppTimingGettimezonecomboboxitemsGetParams {
+  SelectedTimezoneId?: string | null;
 }
 
 export interface ApiTokenauthRefreshtokenPostParams {
@@ -5417,25 +3708,69 @@ export interface ApiTokenauthTestnotificationGetParams {
   severity?: string | null;
 }
 
-export interface ApiServicesAppTweetGetlatesttweetsGetParams {
-  /** @format int32 */
-  count?: number;
+export interface ApiTwitterGetaccesstokenPostParams {
+  token?: string | null;
+  verifier?: string | null;
 }
 
-export interface ApiServicesAppTweetGetsingletweetGetParams {
+export interface ApiServicesAppUicustomizationsettingsChangethemewithdefaultvaluesPostParams {
+  themeName?: string | null;
+}
+
+export interface ApiServicesAppUserGetuserstoexcelGetParams {
+  Filter?: string | null;
+  Permissions?: string[] | null;
+
+  /** @format int32 */
+  Role?: number | null;
+  OnlyLockedUsers?: boolean;
+  Sorting?: string | null;
+}
+
+export interface ApiServicesAppUserGetuserforeditGetParams {
+  /** @format int64 */
+  Id?: number | null;
+}
+
+export interface ApiServicesAppUserGetuserpermissionsforeditGetParams {
   /** @format int64 */
   Id?: number;
 }
 
-export interface ApiServicesAppTweetGettweetsGetParams {
-  /** @format int32 */
-  CompanyId?: number | null;
-
-  /** @format int32 */
-  Tag?: number | null;
-
+export interface ApiServicesAppUserDeleteuserDeleteParams {
   /** @format int64 */
-  UserId?: number | null;
+  Id?: number;
+}
+
+export interface ApiServicesAppUserdelegationGetdelegatedusersGetParams {
+  /** @format int32 */
+  MaxResultCount?: number;
+
+  /** @format int32 */
+  SkipCount?: number;
+  Sorting?: string | null;
+}
+
+export interface ApiServicesAppUserdelegationRemovedelegationDeleteParams {
+  /** @format int64 */
+  Id?: number;
+}
+
+export interface ApiServicesAppUserlinkGetlinkedusersGetParams {
+  /** @format int32 */
+  MaxResultCount?: number;
+
+  /** @format int32 */
+  SkipCount?: number;
+  Sorting?: string | null;
+}
+
+export interface ApiServicesAppWebhookeventGetGetParams {
+  id?: string | null;
+}
+
+export interface ApiServicesAppWebhooksendattemptGetallsendattemptsGetParams {
+  SubscriptionId?: string | null;
 
   /**
    * @format int32
@@ -5452,27 +3787,22 @@ export interface ApiServicesAppTweetGettweetsGetParams {
   SkipCount?: number;
 }
 
-export interface ApiServicesAppTweetGetmyfollowingstweetsGetParams {
-  /** @format int32 */
-  CompanyId?: number | null;
+export interface ApiServicesAppWebhooksendattemptGetallsendattemptsofwebhookeventGetParams {
+  Id?: string | null;
+}
 
-  /** @format int32 */
-  Tag?: number | null;
+export interface ApiServicesAppWebhooksendattemptResendPostParams {
+  sendAttemptId?: string | null;
+}
 
-  /** @format int64 */
-  UserId?: number | null;
+export interface ApiServicesAppWebhooksubscriptionGetsubscriptionGetParams {
+  subscriptionId?: string | null;
+}
 
-  /**
-   * @format int32
-   * @min 1
-   * @max 1000
-   */
-  MaxResultCount?: number;
+export interface ApiServicesAppWebhooksubscriptionIssubscribedPostParams {
+  webhookName?: string | null;
+}
 
-  /**
-   * @format int32
-   * @min 0
-   * @max 2147483647
-   */
-  SkipCount?: number;
+export interface ApiServicesAppWebhooksubscriptionGetallsubscriptionsiffeaturesgrantedGetParams {
+  webhookName?: string | null;
 }
