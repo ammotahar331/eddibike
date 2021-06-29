@@ -1,5 +1,6 @@
 import type { AuthenticateModel, ErrorResponse } from "@types";
 
+import Link from 'next/link'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
@@ -10,6 +11,7 @@ import { addFormServerErrors } from '@utils/helpers';
 
 import FormInput from "@modules/FormInput";
 import Button from "@elements/Button";
+import Checkbox from "@elements/Checkbox";
 
 import styles from './style.module.scss';
 
@@ -82,6 +84,15 @@ const Login: React.FC<Props> = () => {
           title={"Anmelden" as string}
           type="submit"
         />
+
+        <Checkbox
+          title={"Angemeldet bleiben" as string}
+          id={"Angemeldet bleiben" as string}
+        />
+
+        <Link href="/my-account/lost-password">
+          <a>Passwort vergessen?</a>
+        </Link>
       </form>
     </div>
   );

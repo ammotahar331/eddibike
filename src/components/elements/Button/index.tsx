@@ -1,5 +1,7 @@
 import type { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 
+import styles from './style.module.scss';
+
 interface Props
   extends DetailedHTMLProps<
     ButtonHTMLAttributes<HTMLButtonElement>,
@@ -9,7 +11,7 @@ interface Props
 }
 
 const Button: React.FC<Props> = ({ title, ...rest }) => {
-  return <button {...rest}>{title}</button>;
+  return <button className={styles.button} {...rest}>{title}</button>;
 };
 
 export default Button;

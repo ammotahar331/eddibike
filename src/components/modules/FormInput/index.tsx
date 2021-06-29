@@ -5,6 +5,8 @@ import { ErrorMessage } from "@hookform/error-message";
 
 import type { DeepMap, FieldError } from "react-hook-form";
 
+import styles from './style.module.scss';
+
 interface Props<T = unknown>
   extends DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
@@ -20,7 +22,7 @@ interface Props<T = unknown>
 const FormInput = React.forwardRef<HTMLInputElement, Props>(
   ({ className, containerClass, label, req, errors, ...props }, ref) => {
     return (
-      <div className={cn("form-group", containerClass)}>
+      <div className={cn("form-group", styles.formInputContainer, containerClass)}>
         {label && (
           <label>
             {label} {req && <span className="required">*</span>}
